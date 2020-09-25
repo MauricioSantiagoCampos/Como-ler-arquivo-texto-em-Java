@@ -1,0 +1,3 @@
+Etapa 1:
+Leitura simples
+com File e Scanner

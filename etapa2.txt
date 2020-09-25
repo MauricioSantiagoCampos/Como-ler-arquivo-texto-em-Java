@@ -1,0 +1,3 @@
+Etapa 2:
+FileReader e BufferedReader
+com controle manual
