@@ -4,7 +4,11 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
+
+import entities.Product;
 
 public class Program {
 
@@ -75,6 +79,53 @@ public class Program {
 			while (line != null) {
 				System.out.println(line);
 				line = bufferedReaderEtapa3.readLine();
+			}
+		}
+		catch (IOException erro) {
+			System.out.println("ERROR: " + erro.getMessage());
+		}
+		
+		
+	// Etapa 4 - Utilização em Exemplo Prático
+		System.out.println();
+		
+		List<Product> list = new ArrayList<Product>();
+		
+		String pathEtapa4 = "M:\\CURSOS\\GitHub Desktop\\MeusProjetos\\Como-ler-arquivo-texto-em-Java\\in.txt";
+		
+		try (BufferedReader bufferedReaderEtapa4 = new BufferedReader(new FileReader(pathEtapa4))) {
+		
+			/* 
+			 * Esse primeiro .readLine() irá ler a primeira linha do arquivo, que no caso é o cabeçalho
+			 * como não precisamos do cabeçalho, queremos cadastrar apenas os produtos, será necessario pular essa linha.
+			 */
+			String line = bufferedReaderEtapa4.readLine();
+			/*			 * 
+			 *  O comando abaixo irá fazer ele ler a proxima linha antes de começar nosso loop
+			*/ 
+			line = bufferedReaderEtapa4.readLine();
+			while (line != null) {	
+				
+				/*
+				 * O comando .split "quebra" o string  onde é especificado
+				 * No caso, onde houver virgula(","), separando assim nome, preço e quantidade
+				 */
+				String[] vector = line.split(",");
+				String name = vector[0];
+				Double price = Double.parseDouble(vector[1]);
+				Integer quantity = Integer.parseInt(vector[2]);
+				
+				Product product = new Product(name, price, quantity);
+				
+				list.add(product);
+				
+				line = bufferedReaderEtapa4.readLine();
+				
+			}
+			
+			System.out.println("PRODUCTS: ");
+			for (Product product : list) {
+				System.out.println(product);
 			}
 		}
 		catch (IOException erro) {
